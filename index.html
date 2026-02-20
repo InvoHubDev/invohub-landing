@@ -370,39 +370,45 @@
           color: var(--ink);
         }
 
-        .langMenu {
+        .langMenu{
           position: fixed;
-          /* key change */
-          display: none;
-          padding: 10px;
-          border: 1px solid var(--line);
-          background: #fff;
-          border-radius: 14px;
-          box-shadow: 0 12px 36px rgba(15, 20, 19, .08);
-          z-index: 9999;
+          display:none;
+          padding:8px;
+          border:1px solid var(--line2);
+          background:#fff;
+          border-radius:14px;
+          box-shadow: 0 14px 40px rgba(15,20,19,.10);
+          z-index:9999;
+          min-width:160px;
         }
 
-        .langMenu.open {
-          display: block;
+        .langMenu.open{
+          display:block;
         }
 
-        .langMenu select {
-          border: 1px solid var(--line);
-          background: #fff;
-          border-radius: 12px;
-          padding: 10px 12px;
-          font-weight: 700;
-          font-size: 13px;
-          outline: none;
-          cursor: pointer;
+        .langItem{
+          width:100%;
+          display:flex;
+          align-items:center;
+          gap:10px;
+
+          padding:10px 12px;
+          border-radius:10px;
+          border:none;
+          background:none;
+          font-weight:700;
+          font-size:13px;
+          cursor:pointer;
+          transition: background .15s ease;
         }
 
-        .langMenu select:focus {
-          box-shadow: 0 0 0 3px rgba(117, 122, 121, .18);
-          border-color: rgba(117, 122, 121, .50);
+        .langItem:hover{
+          background: rgba(18,109,251,.08);
         }
 
-
+        .flag{
+          font-size:16px;
+        }
         .heroTitle {
           text-align: center;
           margin: 14px auto 10px;
@@ -1757,14 +1763,34 @@
           font-weight:800;
         }
 
-        .mobileLang{
-          margin-top: 6px;
-          background: rgba(255,255,255,.85);
+        .mobileLang .mobileLangItem{
+          margin-top: 8px;
           border:1px solid var(--line2);
-          border-radius:14px;
-          padding:12px 14px;
+          background: rgba(255,255,255,.92);
+          justify-content: space-between;
+        }
+        .mobileLang .mobileLangItem:hover{
+          background: rgba(18,109,251,.08);
         }
 
+        .mobileLangItem .flag{
+          margin-right: 10px;
+        }
+
+        .langCheck{
+          opacity: 0;
+          font-weight: 900;
+          color: #126DFB;
+        }
+
+        .langItem.isActive .langCheck{
+          opacity: 1;
+        }
+
+        .langItem.isActive{s
+          background: rgba(18,109,251,.08);
+          border-color: rgba(18,109,251,.22);
+        }
         .mobileLangLabel{
           display:block;
           font-size:12px;
@@ -1828,11 +1854,16 @@
                     <span class="langCode" id="langCode">EN</span>
                 </button>
 
-                <div class="langMenu" id="langMenu" role="dialog" aria-label="Language menu">
-                    <select id="langSelect">
-                        <option value="en">English</option>
-                        <option value="ru">Русский</option>
-                    </select>
+                <div class="langMenu" id="langMenu" role="menu">
+                    <button class="langItem" data-lang="en">
+                        <span class="flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+
+                    <button class="langItem" data-lang="ru">
+                        <span class="flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -1872,11 +1903,19 @@
             <a href="#faq" data-i18n="nav.faq">FAQ</a>
 
             <div class="mobileLang">
-                <label class="mobileLangLabel" data-i18n="nav.langLabel">Language</label>
-                <select id="langSelectMobile">
-                    <option value="en">English</option>
-                    <option value="ru">Русский</option>
-                </select>
+                <div class="mobileLangLabel" data-i18n="nav.langLabel">Language</div>
+
+                <button class="langItem mobileLangItem" data-lang="en" type="button">
+                    <span class="flag">🇬🇧</span>
+                    <span>English</span>
+                    <span class="langCheck" aria-hidden="true">✓</span>
+                </button>
+
+                <button class="langItem mobileLangItem" data-lang="ru" type="button">
+                    <span class="flag">🇷🇺</span>
+                    <span>Русский</span>
+                    <span class="langCheck" aria-hidden="true">✓</span>
+                </button>
             </div>
         </div>
     </div>
@@ -2131,21 +2170,27 @@
     function getByPath(obj, path) { return path.split(".").reduce((a, k) => a?.[k], obj); }
     function apply(lang, dict) {
       document.documentElement.lang = lang;
+
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const v = getByPath(dict, el.getAttribute("data-i18n"));
         if (typeof v !== "string") return;
 
-        if (el.classList.contains("faqAnswer") ||
-          el.classList.contains("lead")
-        ) {
+        if (el.classList.contains("faqAnswer") || el.classList.contains("lead")) {
           el.innerHTML = v;
         } else {
           el.textContent = v;
         }
       });
+
       localStorage.setItem("inv_lang", lang);
-      document.getElementById("langSelect").value = lang;
-      document.getElementById("langCode").textContent = lang.toUpperCase();
+
+      // update globe code
+      const codeEl = document.getElementById("langCode");
+      if (codeEl) codeEl.textContent = lang.toUpperCase();
+
+      // sync mobile select
+      const mobileSel = document.getElementById("langSelectMobile");
+      if (mobileSel) mobileSel.value = lang;
     }
 
     const io = new IntersectionObserver((entries) => {
@@ -2347,19 +2392,44 @@
 
 
     (async function init() {
-      const langSelect = document.getElementById("langSelect");
+      const langItems = document.querySelectorAll(".langItem");
 
-      langSelect.addEventListener("change", (e) => {
-        const selected = e.target.value;
+       langItems.forEach(item => {
+          item.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
 
-        apply(selected, content[selected]);
-        setLangMenu(false);
+            const selected = item.dataset.lang;
+            apply(selected, window.CURRENT_CONTENT[selected]);
 
-        // wait one frame until layout updates
-        requestAnimationFrame(() => {
-          positionLangMenu();
+            setLangMenu(false); // ✅ closes properly
+         });
+       });
+
+       function setActiveLangUI(lang){
+          document.querySelectorAll(".langItem").forEach(b=>{
+            b.classList.toggle("isActive", b.dataset.lang === lang);
+          });
+       }
+
+        document.querySelectorAll(".langItem").forEach(item => {
+          item.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const selected = item.dataset.lang;
+            apply(selected, window.CURRENT_CONTENT[selected]);
+
+            setActiveLangUI(selected);
+
+            // close desktop language popup if open
+            setLangMenu(false);
+
+            // close mobile menu if open
+            if (typeof setMobileMenu === "function") setMobileMenu(false);
+          });
         });
-      });
+
       document.getElementById("y").textContent = new Date().getFullYear();
 
       const cms = await loadCMS();
@@ -2369,7 +2439,7 @@
       const saved = localStorage.getItem("inv_lang");
       const lang = (saved && content[saved]) ? saved : "en";
       apply(lang, content[lang]);
-      langSelect.value = lang;
+      setActiveLangUI(lang);
 
       const startedAt = Date.now();
       const form = document.getElementById("leadForm");
@@ -2465,7 +2535,6 @@
     // ==== Language select box ===
     const langToggle = document.getElementById("langToggle");
     const langMenu = document.getElementById("langMenu");
-    const langSelect = document.getElementById("langSelect");
 
     function positionLangMenu() {
       const r = langToggle.getBoundingClientRect();
@@ -2489,7 +2558,6 @@
 
       if (open) {
         positionLangMenu();
-        langSelect.focus();
       }
     }
 
@@ -2500,7 +2568,10 @@
     });
 
     langMenu.addEventListener("click", (e) => e.stopPropagation());
-    document.addEventListener("click", () => setLangMenu(false));
+    document.addEventListener("click", () => {
+      langMenu.classList.remove("open");
+      langToggle.setAttribute("aria-expanded", "false");
+    });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") setLangMenu(false); });
 
     // keep it “locked” to the button even if user scrolls/resizes
@@ -2542,35 +2613,6 @@
     mobileMenu.querySelectorAll("a").forEach(a=>{
       a.addEventListener("click", ()=> setMobileMenu(false));
     });
-
-
-    // ===== Sync mobile language select with your existing i18n =====
-    const langSelectMobile = document.getElementById("langSelectMobile");
-
-    // Ensure it matches current language on load (after apply() runs)
-    (function syncMobileLang(){
-      const saved = localStorage.getItem("inv_lang") || "en";
-      if(langSelectMobile) langSelectMobile.value = saved;
-    })();
-
-    if(langSelectMobile){
-      langSelectMobile.addEventListener("change", (e)=>{
-        const selected = e.target.value;
-
-        // IMPORTANT: your init() defines "content" inside it.
-        // Use CONTENT here (or cms content if you stored it globally).
-        // Easiest: expose a global CURRENT_CONTENT in init(). If you didn't, fallback to CONTENT.
-        const dict = (window.CURRENT_CONTENT && window.CURRENT_CONTENT[selected]) ? window.CURRENT_CONTENT[selected] : CONTENT[selected];
-        apply(selected, dict);
-
-        // also sync the desktop select
-        const desktopSel = document.getElementById("langSelect");
-        if(desktopSel) desktopSel.value = selected;
-
-        setMobileMenu(false);
-      });
-}
-
 </script>
 </body>
 

@@ -309,16 +309,6 @@
           }
         }
 
-        /* Mobile */
-        @media (max-width: 760px) {
-          .navCta {
-            padding: 6px 9px;
-            font-size: 10px;
-            letter-spacing: .2px;
-          }
-        }
-
-
         nav {
           gap: 6px;
           /* tighter nav */
@@ -1682,6 +1672,118 @@
             display: inline;
           }
         }
+
+        /* Right-side actions */
+        .topActions{
+          display:flex;
+          align-items:center;
+          gap:10px;
+        }
+
+        /* CTA text swap */
+        .navCta .ctaShort{ display:none; }
+        @media (max-width: 760px){
+          .navCta .ctaFull{ display:none; }
+          .navCta .ctaShort{ display:inline; }
+        }
+
+        /* Hamburger button (hidden on desktop) */
+        .menuBtn{
+          display:none;                 /* hidden on desktop */
+          width:42px;
+          height:42px;
+          border-radius:14px;
+          border:1px solid var(--line2);
+          background: rgba(255,255,255,.92);
+
+          flex-direction:column;        /* stack lines */
+          align-items:center;
+          justify-content:center;
+          gap:4px;
+
+          cursor:pointer;
+        }
+        .menuBtn span{
+          width:18px;
+          height:2px;
+          background: var(--ink);
+          border-radius:999px;
+          display:block;
+        }
+
+        /* Mobile layout */
+        @media (max-width: 760px){
+          .deskNav{ display:none; }
+          .menuBtn{ display:flex; }
+
+          .topbar{
+            padding: 12px 0;
+            gap: 10px;
+          }
+
+          /* keep CTA from shifting/cropping */
+          .navCta{
+            margin-right:0;
+            padding: 9px 12px;
+            font-size: 12px;
+            white-space: nowrap;
+          }
+        }
+
+        /* Mobile menu drawer */
+        .mobileMenu{
+          display:none;
+          border-top:1px solid var(--line2);
+          background: var(--glass);
+          backdrop-filter: blur(14px);
+        }
+        .mobileMenu.open{ display:block; }
+
+        .mobileMenuInner{
+          max-width: var(--max);
+          margin: 0 auto;
+          padding: 14px 22px 18px;
+          display:grid;
+          gap:10px;
+        }
+
+        .mobileMenuInner a{
+          text-decoration:none;
+          color: var(--ink);
+          background: rgba(255,255,255,.85);
+          border:1px solid var(--line2);
+          border-radius:14px;
+          padding:12px 14px;
+          font-weight:800;
+        }
+
+        .mobileLang{
+          margin-top: 6px;
+          background: rgba(255,255,255,.85);
+          border:1px solid var(--line2);
+          border-radius:14px;
+          padding:12px 14px;
+        }
+
+        .mobileLangLabel{
+          display:block;
+          font-size:12px;
+          color: var(--muted);
+          font-weight:800;
+          margin-bottom:8px;
+        }
+
+        #langSelectMobile{
+          width:100%;
+          border:1px solid var(--line2);
+          background:#fff;
+          border-radius:12px;
+          padding:10px 12px;
+          font-weight:700;
+          font-size:13px;
+          outline:none;
+        }
+
     </style>
 </head>
 
@@ -1705,7 +1807,8 @@
             </div>
         </a>
 
-        <nav aria-label="Primary">
+        <!-- Desktop nav -->
+        <nav class="deskNav" aria-label="Primary">
             <a href="#what" data-i18n="nav.what">What We Do</a>
             <a href="#benefits" data-i18n="nav.benefits">Benefits</a>
             <a href="#how" data-i18n="nav.how">How it works</a>
@@ -1713,10 +1816,11 @@
             <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
             <a href="#faq" data-i18n="nav.faq">FAQ</a>
 
-            <!-- Language (globe) -->
+            <!-- Language (globe) stays in desktop nav -->
             <div class="langWrap">
-                <button class="globeBtn" id="langToggle" type="button" aria-haspopup="true" aria-expanded="false"
-                        aria-label="Change language">
+                <button class="globeBtn" id="langToggle" type="button"
+                        aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+                    <!-- your globe svg -->
                     <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill="currentColor"
                               d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm7.93 9h-3.17a15.7 15.7 0 0 0-1.2-5.02A8.03 8.03 0 0 1 19.93 11ZM12 4c.9 0 2.25 2.02 3.02 7H8.98C9.75 6.02 11.1 4 12 4ZM4.07 13h3.17c.2 1.82.67 3.6 1.2 5.02A8.03 8.03 0 0 1 4.07 13Zm3.17-2H4.07a8.03 8.03 0 0 1 4.37-5.02c-.53 1.42-1 3.2-1.2 5.02ZM12 20c-.9 0-2.25-2.02-3.02-7h6.04C14.25 17.98 12.9 20 12 20Zm3.56-2.98c.53-1.42 1-3.2 1.2-5.02h3.17a8.03 8.03 0 0 1-4.37 5.02ZM8.98 13c-.11-1.33-.11-2.67 0-4h6.04c.11 1.33.11 2.67 0 4H8.98Z"/>
@@ -1733,20 +1837,51 @@
             </div>
         </nav>
 
-
-        <a class="navCta" href="#start">
+        <!-- Right actions (CTA + hamburger on mobile) -->
+        <div class="topActions">
+            <a class="navCta" href="#start">
         <span class="textWrap">
           <span class="textInner">
-            <span class="ctaFull" data-i18n="nav.cta">Get started →</span>
-            <span class="ctaFull" data-i18n="nav.cta">Get started →</span>
-            <span class="ctaShort" data-i18n="nav.cta">Start →</span>
-            <span class="ctaShort" data-i18n="nav.cta">Start →</span>
+            <span>
+              <span class="ctaFull" data-i18n="nav.ctaFull">Get started →</span>
+              <span class="ctaShort" data-i18n="nav.ctaShort">Start →</span>
+            </span>
+            <span>
+              <span class="ctaFull" data-i18n="nav.ctaFull">Get started →</span>
+              <span class="ctaShort" data-i18n="nav.ctaShort">Start →</span>
+            </span>
           </span>
         </span>
-        </a>
+            </a>
 
+            <button class="menuBtn" id="menuBtn" type="button"
+                    aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
+        <div class="mobileMenuInner">
+            <a href="#what" data-i18n="nav.what">What We Do</a>
+            <a href="#benefits" data-i18n="nav.benefits">Benefits</a>
+            <a href="#how" data-i18n="nav.how">How it works</a>
+            <a href="#integrations" data-i18n="nav.integrations">Integrations</a>
+            <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+            <a href="#faq" data-i18n="nav.faq">FAQ</a>
+
+            <div class="mobileLang">
+                <label class="mobileLangLabel" data-i18n="nav.langLabel">Language</label>
+                <select id="langSelectMobile">
+                    <option value="en">English</option>
+                    <option value="ru">Русский</option>
+                </select>
+            </div>
+        </div>
     </div>
 </header>
+
 
 <main id="top" class="wrap">
     <div class="stack">
@@ -2024,7 +2159,7 @@
       en: {
         tagline: "InvoHub landing page",
         kicker: "UAE • e-Invoicing readiness",
-        nav: { what: "What We Do", benefits: "Benefits", how: "How it works", integrations: "Integrations", pricing: "Pricing", faq: "FAQ", cta: "Get started →" },
+        nav: { what: "What We Do", benefits: "Benefits", how: "How it works", integrations: "Integrations", pricing: "Pricing", faq: "FAQ", ctaFull: "Get started →", ctaShort:"Start →" },
         hero: {
           titleMain: "UAE e-Invoicing.",
           titleSub: "Structured Before It Becomes Mandatory.",
@@ -2118,7 +2253,7 @@
       ru: {
         tagline: "Лендинг InvoHub",
         kicker: "ОАЭ e-Invoicing | Подготовка бизнеса",
-        nav: { what: "Что делаем", benefits: "Преимущества", how: "Как работает", integrations: "Интеграции", pricing: "Пакеты", faq: "FAQ", cta: "Начать →" },
+        nav: { what: "Что делаем", benefits: "Преимущества", how: "Как работает", integrations: "Интеграции", pricing: "Пакеты", faq: "FAQ", ctaFull: "Начать →", ctaShort:"Старт →" },
         hero: {
           titleMain: "e-Invoicing в ОАЭ.",
           titleSub: "Контроль до наступления обязательности",
@@ -2229,6 +2364,7 @@
 
       const cms = await loadCMS();
       const content = cms || CONTENT;
+      window.CURRENT_CONTENT = content;
 
       const saved = localStorage.getItem("inv_lang");
       const lang = (saved && content[saved]) ? saved : "en";
@@ -2376,6 +2512,64 @@
       if (langMenu.classList.contains("open")) positionLangMenu();
     });
 
+    // ===== Mobile hamburger menu =====
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    function setMobileMenu(open){
+      mobileMenu.classList.toggle("open", open);
+      menuBtn.setAttribute("aria-expanded", String(open));
+    }
+
+    menuBtn.addEventListener("click", (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      setMobileMenu(!mobileMenu.classList.contains("open"));
+    });
+
+    // close menu on outside click
+    document.addEventListener("click", ()=> setMobileMenu(false));
+
+    // prevent inside clicks from closing
+    mobileMenu.addEventListener("click", (e)=> e.stopPropagation());
+
+    // close on ESC
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape") setMobileMenu(false);
+    });
+
+    // close when clicking a link
+    mobileMenu.querySelectorAll("a").forEach(a=>{
+      a.addEventListener("click", ()=> setMobileMenu(false));
+    });
+
+
+    // ===== Sync mobile language select with your existing i18n =====
+    const langSelectMobile = document.getElementById("langSelectMobile");
+
+    // Ensure it matches current language on load (after apply() runs)
+    (function syncMobileLang(){
+      const saved = localStorage.getItem("inv_lang") || "en";
+      if(langSelectMobile) langSelectMobile.value = saved;
+    })();
+
+    if(langSelectMobile){
+      langSelectMobile.addEventListener("change", (e)=>{
+        const selected = e.target.value;
+
+        // IMPORTANT: your init() defines "content" inside it.
+        // Use CONTENT here (or cms content if you stored it globally).
+        // Easiest: expose a global CURRENT_CONTENT in init(). If you didn't, fallback to CONTENT.
+        const dict = (window.CURRENT_CONTENT && window.CURRENT_CONTENT[selected]) ? window.CURRENT_CONTENT[selected] : CONTENT[selected];
+        apply(selected, dict);
+
+        // also sync the desktop select
+        const desktopSel = document.getElementById("langSelect");
+        if(desktopSel) desktopSel.value = selected;
+
+        setMobileMenu(false);
+      });
+}
 
 </script>
 </body>

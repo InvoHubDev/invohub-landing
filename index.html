@@ -1832,6 +1832,34 @@
           outline:none;
         }
 
+
+    .formStatus{
+      display:none;
+      width:100%;
+      box-sizing:border-box;
+
+      margin: 0 0 12px;
+      padding: 12px 14px;
+
+      border-radius: 14px;
+
+      background: #E1EAF8;
+
+      border: 1px solid rgba(18,109,251,.25);
+
+      font-weight: 400;
+
+      font-size: 14px;
+      line-height: 1.5;
+
+      color: var(--ink);
+    }
+
+    .formStatus.isSuccess,
+    .formStatus.isError{
+      display:block;
+    }
+
     </style>
 </head>
 
@@ -2153,6 +2181,9 @@
                     <input type="hidden" name="_subject" value="New InvoHub Request">
                     <input type="hidden" name="_captcha" value="false">
                     <div class="full">
+                        <div id="formStatus" class="formStatus" aria-live="polite"></div>
+                    </div>
+                    <div class="full">
                         <button class="submit primary" type="submit">
                 <span class=" btnText">
                   <span class="btnTextInner">
@@ -2161,6 +2192,7 @@
                   </span>
                 </span>
                         </button>
+                    </div>
                 </form>
                 <div class="meta">
                     <span data-i18n="start.meta"></span>
@@ -2192,8 +2224,26 @@
       } catch (e) { return null; }
     }
     function getByPath(obj, path) { return path.split(".").reduce((a, k) => a?.[k], obj); }
+
+    function clearStatus(){
+      const el = document.getElementById("formStatus");
+      if(!el) return;
+      el.textContent = "";
+      el.classList.remove("isSuccess","isError");
+    }
+
+    function showStatus(type, message){
+      const el = document.getElementById("formStatus");
+      if(!el) return;
+
+      el.textContent = message;
+      el.classList.remove("isSuccess","isError");
+      el.classList.add(type === "success" ? "isSuccess" : "isError");
+    }
+
     function apply(lang, dict) {
       document.documentElement.lang = lang;
+      window.CURRENT_LANG = lang;
 
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const v = getByPath(dict, el.getAttribute("data-i18n"));
@@ -2215,6 +2265,7 @@
       // sync mobile select
       const mobileSel = document.getElementById("langSelectMobile");
       if (mobileSel) mobileSel.value = lang;
+      clearStatus();
     }
 
     const io = new IntersectionObserver((entries) => {
@@ -2310,6 +2361,8 @@
           title: "Prepare Before It Becomes Mandatory",
           lead: "Identify compliance gaps and integration risks before connecting to accredited providers. Request the UAE e-Invoicing Readiness Checklist or schedule a short strategic call. <br>No disruption. No guesswork",
           meta: "Your information is treated with strict confidentiality.",
+          statusSuccess: "Thanks! Your request was sent. We’ll contact you shortly.",
+          statusError: "Something went wrong. Please try again in a minute.",
         },
         form: { name: "Full Name", email: "Business Email", phone: "Phone Number", erp: "Current ERP Platform", submit: "Request Assessment →" },
         footerLegal: {
@@ -2404,6 +2457,8 @@
           title: "Подготовьтесь до того, как это станет обязательным",
           lead: "Выявите пробелы в комплаенсе и риски интеграции до подключения к аккредитованным провайдерам. Запросите чек-лист готовности к UAE e-Invoicing или запланируйте короткий звонок по оценке готовности.<br>Без сбоев. Без неопределенности.",
           meta: "Ваша информация обрабатывается с соблюдением строгой конфиденциальности.",
+          statusSuccess: "Благодарим, Ваш запрос был отправлен. Мы свяжемся с Вами в ближайшее время.",
+          statusError: "При отправке произошла ошибка. Пожалуйста, повторите попытку.",
         },
         form: { name: "Полное имя", email: "Контактный e-mail", phone: "Контактный телефон", erp: "Текущая ERP-система", submit: "Запросить анализ →" },
         footerLegal: {
@@ -2494,14 +2549,14 @@
           });
 
           if (response.ok) {
-            alert("Thank you! We’ll contact you shortly.");
+            showStatus("success", window.CURRENT_CONTENT[window.CURRENT_LANG].start.statusSuccess);
             form.reset();
           } else {
-            alert("Oops! Something went wrong.");
+            showStatus("error", window.CURRENT_CONTENT[window.CURRENT_LANG].start.statusError);
           }
 
         } catch (error) {
-          alert("Network error. Please try again.");
+          showStatus("error", window.CURRENT_CONTENT[window.CURRENT_LANG].start.statusError);
         }
       });
     })();

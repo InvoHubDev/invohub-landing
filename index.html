@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <link rel="icon" type="image/png" href="/my-favicon/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/svg+xml" href="/my-favicon/favicon.svg">
@@ -16,11 +15,9 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
-
 <body>
 <div class="bgAnim" aria-hidden="true"></div>
 <div class="spotlight" aria-hidden="true"></div>
-
 <!-- floating shapes -->
 <div class="floaters" aria-hidden="true">
     <span class="flo f1"></span>
@@ -36,7 +33,6 @@
                 <img src="InvoHubLogo.svg" alt="InvoHub logo" class="logoImg">
             </div>
         </a>
-
         <!-- Desktop nav -->
         <nav class="deskNav" aria-label="Primary">
             <a href="#what" data-i18n="nav.what">What We Do</a>
@@ -45,7 +41,6 @@
             <a href="#integrations" data-i18n="nav.integrations">Integrations</a>
             <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
             <a href="#faq" data-i18n="nav.faq">FAQ</a>
-
             <!-- Language (globe) stays in desktop nav -->
             <div class="langWrap">
                 <button class="globeBtn" id="langToggle" type="button"
@@ -57,14 +52,12 @@
                     </svg>
                     <span class="langCode" id="langCode">EN</span>
                 </button>
-
                 <div class="langMenu" id="langMenu" role="menu">
                     <button class="langItem" data-lang="en" type="button">
                         <span class="flag">🇬🇧</span>
                         <span>English</span>
                         <span class="langCheck" aria-hidden="true">✓</span>
                     </button>
-
                     <button class="langItem" data-lang="ru" type="button">
                         <span class="flag">🇷🇺</span>
                         <span>Русский</span>
@@ -73,31 +66,28 @@
                 </div>
             </div>
         </nav>
-
         <!-- Right actions (CTA + hamburger on mobile) -->
         <div class="topActions">
             <a class="navCta" href="#start">
-        <span class="textWrap">
-          <span class="textInner">
-            <span>
-              <span class="ctaFull" data-i18n="nav.ctaFull">Get started →</span>
-              <span class="ctaShort" data-i18n="nav.ctaShort">Start →</span>
-            </span>
-            <span>
-              <span class="ctaFull" data-i18n="nav.ctaFull">Get started →</span>
-              <span class="ctaShort" data-i18n="nav.ctaShort">Start →</span>
-            </span>
-          </span>
-        </span>
+               <span class="textWrap">
+               <span class="textInner">
+               <span>
+               <span class="ctaFull" data-i18n="nav.ctaFull">Get started →</span>
+               <span class="ctaShort" data-i18n="nav.ctaShort">Start →</span>
+               </span>
+               <span>
+               <span class="ctaFull" data-i18n="nav.ctaFull">Get started →</span>
+               <span class="ctaShort" data-i18n="nav.ctaShort">Start →</span>
+               </span>
+               </span>
+               </span>
             </a>
-
             <button class="menuBtn" id="menuBtn" type="button"
                     aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </div>
-
     <!-- Mobile drawer -->
     <div class="mobileMenu" id="mobileMenu" aria-label="Mobile menu">
         <div class="mobileMenuInner">
@@ -107,16 +97,13 @@
             <a href="#integrations" data-i18n="nav.integrations">Integrations</a>
             <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
             <a href="#faq" data-i18n="nav.faq">FAQ</a>
-
             <div class="mobileLang">
                 <div class="mobileLangLabel" data-i18n="nav.langLabel">Language</div>
-
                 <button class="langItem mobileLangItem" data-lang="en" type="button">
                     <span class="flag">🇬🇧</span>
                     <span>English</span>
                     <span class="langCheck" aria-hidden="true">✓</span>
                 </button>
-
                 <button class="langItem mobileLangItem" data-lang="ru" type="button">
                     <span class="flag">🇷🇺</span>
                     <span>Русский</span>
@@ -126,135 +113,123 @@
         </div>
     </div>
 </header>
-
-
 <main id="top" class="wrap">
     <div class="stack">
-
-
         <!-- HERO (TEXT ONLY) -->
         <section class="section hero reveal">
             <div class="heroGlow"></div>
-
             <div class="heroInner">
                 <div class="kicker">
                     <span class="kickerDot"></span>
                     <span class="kickerText" data-i18n="kicker">UAE e-Invoicing readiness</span>
                 </div>
-
-
                 <h1>
                     <span data-i18n="hero.titleMain">UAE e-Invoicing.</span>
                     <span class="hero-sub" data-i18n="hero.titleSub">Structured Before It Becomes Mandatory.</span>
                 </h1>
-
                 <div class="lead" data-i18n="hero.lead"></div>
-
                 <div class="ctaRow">
                     <a class="btn primary" href="#start">
-              <span class="btnText">
-                <span class="btnTextInner">
-                  <span data-i18n="hero.cta1">Download the UAE e-Invoicing Readiness Checklist →</span>
-                  <span data-i18n="hero.cta1">Download the UAE e-Invoicing Readiness Checklist →</span>
-                </span>
-              </span>
+                     <span class="btnText">
+                     <span class="btnTextInner">
+                     <span data-i18n="hero.cta1">Download the UAE e-Invoicing Readiness Checklist →</span>
+                     <span data-i18n="hero.cta1">Download the UAE e-Invoicing Readiness Checklist →</span>
+                     </span>
+                     </span>
                     </a>
                     <a class="btn secondary" href="#start">
-              <span class="btnText">
-                <span class="btnTextInner">
-                  <span data-i18n="hero.cta2">Book a 20-minute Readiness Call →</span>
-                  <span data-i18n="hero.cta2">Book a 20-minute Readiness Call →</span>
-                </span>
-              </span>
+                     <span class="btnText">
+                     <span class="btnTextInner">
+                     <span data-i18n="hero.cta2">Book a 20-minute Readiness Call →</span>
+                     <span data-i18n="hero.cta2">Book a 20-minute Readiness Call →</span>
+                     </span>
+                     </span>
                     </a>
-
                     <div class="meta">
                         <span data-i18n="hero.meta">ERP-neutral</span>
                         <span class="metaDot"></span>
                         <span class="faint" data-i18n="hero.meta2">Structured • Confidential</span>
                     </div>
-
                     <!-- <div class="trust">
-                  <p class="trustTitle" data-i18n="trust.title">Trusted by finance teams who prefer control over reaction</p>
-                  <div class="logoRow" aria-label="Trusted by">
-                    <div class="logoCarousel" aria-label="Trusted by">
-          <div class="logoTrack">
+                       <p class="trustTitle" data-i18n="trust.title">Trusted by finance teams who prefer control over reaction</p>
+                       <div class="logoRow" aria-label="Trusted by">
+                         <div class="logoCarousel" aria-label="Trusted by">
+                       <div class="logoTrack">
 
-            <!- ORIGINAL 4 -->
+                       <!- ORIGINAL 4 -->
                     <!-- <span class="logoMark">
-          <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="4" y="6" width="16" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="M7 10h10M7 13h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>ERP</span>
-        </span>
+                       <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
+                         <rect x="4" y="6" width="16" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                         <path d="M7 10h10M7 13h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                       </svg>
+                       <span>ERP</span>
+                       </span>
 
-        <span class="logoMark">
-          <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3v18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M7 7h8a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>Finance</span>
-        </span>
+                       <span class="logoMark">
+                       <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
+                         <path d="M12 3v18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                         <path d="M7 7h8a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                       </svg>
+                       <span>Finance</span>
+                       </span>
 
-        <span class="logoMark">
-          <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M9 12l2 2 4-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>VAT</span>
-        </span>
+                       <span class="logoMark">
+                       <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
+                         <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                         <path d="M9 12l2 2 4-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                       </svg>
+                       <span>VAT</span>
+                       </span>
 
-        <span class="logoMark">
-          <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <rect x="6" y="10" width="12" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="M12 15v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>ASP</span>
-        </span>
+                       <span class="logoMark">
+                       <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
+                         <path d="M7 7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                         <rect x="6" y="10" width="12" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                         <path d="M12 15v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                       </svg>
+                       <span>ASP</span>
+                       </span>
 
-        <!- DUPLICATE FOR LOOP -->
+                       <!- DUPLICATE FOR LOOP -->
                     <!-- <span class="logoMark">
-          <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="4" y="6" width="16" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="M7 10h10M7 13h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>ERP</span>
-        </span>
+                       <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
+                         <rect x="4" y="6" width="16" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                         <path d="M7 10h10M7 13h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                       </svg>
+                       <span>ERP</span>
+                       </span>
 
-        <span class="logoMark">
-          <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3v18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M7 7h8a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>Finance</span>
-        </span>
+                       <span class="logoMark">
+                       <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
+                         <path d="M12 3v18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                         <path d="M7 7h8a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                       </svg>
+                       <span>Finance</span>
+                       </span>
 
-        <span class="logoMark">
-          <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M9 12l2 2 4-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>VAT</span>
-        </span>
+                       <span class="logoMark">
+                       <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
+                         <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                         <path d="M9 12l2 2 4-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                       </svg>
+                       <span>VAT</span>
+                       </span>
 
-        <span class="logoMark">
-          <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <rect x="6" y="10" width="12" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="M12 15v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>ASP</span>
-        </span>
-          </div>
-        </div>
+                       <span class="logoMark">
+                       <svg class="logoIcon" viewBox="0 0 24 24" aria-hidden="true">
+                         <path d="M7 7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                         <rect x="6" y="10" width="12" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                         <path d="M12 15v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                       </svg>
+                       <span>ASP</span>
+                       </span>
+                       </div>
+                       </div>
 
-        </div> -->
+                       </div> -->
                 </div>
             </div>
         </section>
-
         <!-- FAQ -->
         <section id="faq" class="section reveal">
             <div class="sectionInner">
@@ -266,7 +241,6 @@
                     <h2 class="hTitle" data-i18n="faq.title"></h2>
                     <p class="hNote" data-i18n="faq.note"></p>
                 </div>
-
                 <div class="faq">
                     <details class="faqItem">
                         <summary data-i18n="faq.q1"></summary>
@@ -299,7 +273,6 @@
                 </div>
             </div>
         </section>
-
         <!-- START -->
         <section id="start" class="section reveal">
             <div class="sectionInner">
@@ -311,7 +284,6 @@
                     <h2 class="hTitle" data-i18n="start.title"></h2>
                     <div class="lead" data-i18n="start.lead"></div>
                 </div>
-
                 <form id="leadForm">
                     <div class="field">
                         <label for="name" data-i18n="form.name"></label>
@@ -339,12 +311,12 @@
                     </div>
                     <div class="full">
                         <button class="submit primary" type="submit">
-                <span class=" btnText">
-                  <span class="btnTextInner">
-                    <span data-i18n="form.submit">Request Assessment →</span>
-                    <span data-i18n="form.submit">Request Assessment →</span>
-                  </span>
-                </span>
+                        <span class=" btnText">
+                        <span class="btnTextInner">
+                        <span data-i18n="form.submit">Request Assessment →</span>
+                        <span data-i18n="form.submit">Request Assessment →</span>
+                        </span>
+                        </span>
                         </button>
                     </div>
                 </form>
@@ -353,12 +325,12 @@
                 </div>
                 <div class="telegramLink">
                     <a href="https://t.me/einvoicinguae" target="_blank" rel="noopener">
-                   <span class="tgIcon" aria-hidden="true">
-                      <!-- Telegram SVG -->
-                      <svg viewBox="0 0 24 24">
-                        <path d="M21.9 4.6c.3-1.2-.4-1.7-1.5-1.3L2.7 10.3c-1.2.5-1.2 1.2-.2 1.5l4.5 1.4 1.7 5.4c.2.6.1.9.7.9.5 0 .7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.3 1.7-.8l2.5-14.9zM9.3 14.9l-.4 3.6-1.6-5 10.4-6.6-8.4 8z"/>
-                      </svg>
-                    </span>
+                        <span class="tgIcon" aria-hidden="true">
+                           <!-- Telegram SVG -->
+                           <svg viewBox="0 0 24 24">
+                              <path d="M21.9 4.6c.3-1.2-.4-1.7-1.5-1.3L2.7 10.3c-1.2.5-1.2 1.2-.2 1.5l4.5 1.4 1.7 5.4c.2.6.1.9.7.9.5 0 .7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.3 1.7-.8l2.5-14.9zM9.3 14.9l-.4 3.6-1.6-5 10.4-6.6-8.4 8z"/>
+                           </svg>
+                        </span>
                         <span class="tgText" data-i18n="telegram.join"></span>
                     </a>
                 </div>
@@ -376,7 +348,6 @@
                 </footer>
             </div>
         </section>
-
     </div>
 </main>
 </body>

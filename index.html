@@ -606,14 +606,36 @@
           margin: 16px 0 10px;
           display: grid;
           gap: 10px;
+          grid-template-columns: 1fr;
+          width: 100%;
+          min-width: 0;
+          max-width: 100%;
         }
+ /* --- FIX: prevent overflow + force 1 column on mobile --- */
+.leadBox { max-width: 100%; }
+.lead .leadCards li { max-width: 100%; min-width: 0; }
+
+/* Force 1 column on tablets + phones */
+@media (max-width: 899px) {
+  .lead .leadCards {
+    grid-template-columns: 1fr;
+  }
+  .lead .leadCards li {
+  overflow-wrap: anywhere;
+          word-break: break-word;
+  }
+}
+
+/* Extra safety for very small screens */
+@media (max-width: 520px) {
+  .leadBox { padding: 14px 14px; }
+}
 
         /* 2 columns on desktop, 1 column on mobile */
         @media (min-width: 900px) {
           .lead .leadCards {
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             column-gap: 18px;
-            /* adjust as you like */
             row-gap: 12px;
           }
         }
@@ -641,7 +663,6 @@
             border-color .25s ease;
         }
 
-        /* icon/dot */
         .lead .leadCards li::before {
           content: "";
           width: 8px;
@@ -1788,7 +1809,7 @@
           opacity: 1;
         }
 
-        .langItem.isActive{s
+        .langItem.isActive{
           background: rgba(18,109,251,.08);
           border-color: rgba(18,109,251,.22);
         }
@@ -2305,7 +2326,7 @@
         hero: {
           titleMain: "e-Invoicing в ОАЭ.",
           titleSub: "Контроль до наступления обязательности",
-          lead: "Если ваш бизнес выставляет счета с НДС в ОАЭ, электронный инвойс изменит не форму документа — а логику контроля операций.<br>Речь идет не о PDF. Речь идет о данных и контроле.<p class=\"leadP\">Новая модель электронного инвойса в ОАЭ предполагает:</p><div class=\"leadBox\"><ul class=\"leadCards\"><li><b>формирование</b>структурированных данных</li><li><b>обязательную</b> проверку налоговых данных</li><li><b>передачу</b> через ASP</li><li><b>aвтоматический</b> контроль операций</li></ul></div><p>Для большинства компаний это означает доработку структуры данных в ERP и пересмотр внутренних процедур.<br>InvoHub помогает подготовиться к этим изменениям — без замены системы и без сбоев в работе. <br>Без замены ERP. Без операционных потрясений. С фокусом на управляемость и комплаенс.</p>",
+          lead: "Если ваш бизнес выставляет счета с НДС в ОАЭ, электронный инвойс изменит не форму документа — а логику контроля операций.<br>Речь идет не о PDF. Речь идет о данных и контроле.<p class=\"leadP\">Новая модель электронного инвойса в ОАЭ предполагает:</p><div class=\"leadBox\"><ul class=\"leadCards\"><li><b>формирование</b> структурированных данных</li><li><b>обязательную</b> проверку налоговых данных</li><li><b>передачу</b> через ASP</li><li><b>автоматический</b> контроль операций</li></ul></div><p>Для большинства компаний это означает доработку структуры данных в ERP и пересмотр внутренних процедур.<br>InvoHub помогает подготовиться к этим изменениям — без замены системы и без сбоев в работе. <br>Без замены ERP. Без операционных потрясений. С фокусом на управляемость и комплаенс.</p>",
           cta1: "Получить чек-лист готовности к e-Invoicing в ОАЭ →",
           cta2: "Назначить 20-минутную консультацию",
           meta: "Под контролем",

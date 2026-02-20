@@ -390,6 +390,7 @@
           width:100%;
           display:flex;
           align-items:center;
+          justify-content: space-between;
           gap:10px;
 
           padding:10px 12px;
@@ -1855,14 +1856,16 @@
                 </button>
 
                 <div class="langMenu" id="langMenu" role="menu">
-                    <button class="langItem" data-lang="en">
+                    <button class="langItem" data-lang="en" type="button">
                         <span class="flag">🇬🇧</span>
                         <span>English</span>
+                        <span class="langCheck" aria-hidden="true">✓</span>
                     </button>
 
-                    <button class="langItem" data-lang="ru">
+                    <button class="langItem" data-lang="ru" type="button">
                         <span class="flag">🇷🇺</span>
                         <span>Русский</span>
+                        <span class="langCheck" aria-hidden="true">✓</span>
                     </button>
                 </div>
             </div>
